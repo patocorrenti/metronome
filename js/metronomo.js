@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const state = {
         playing: false,
         ppm: 120,
-        interval: undefined
+        interval: {}
     };
     
     // Selectors
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const $audioSrc = document.querySelector('#audio-metronomo');
 
     // Events
-    $playBtn.addEventListener('click', eventoReproducir);
+    $playBtn.addEventListener('click', eventPlayPause);
     $PpmInput.addEventListener('keyup', function() { changeSpeed(this.value) });
 
     // Inicio
@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // TODO
 
         // Change
-        state[field] = value;
+        state[key] = value;
 
         return state;
     }
 
     function getState(key) {
-        return state['key'];
+        return state[key];
     }
 
 
@@ -66,14 +66,14 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     function playPause() {
         const audio = $audioSrc;
-        let inverval;
+        let interval = {};
         
         // Para intervalo
         clearInterval( getState('interval') );
 
         // Empieza intervalo nuevo
         if (getState('playing')) {
-            inverval = setInterval(function() {
+            interval = setInterval(function() {
                 // Reproduce audio
                 audio.play();
             }, PPMToMiliseconds( getState('ppm') ));
@@ -93,11 +93,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * Evento reproduce audio
+     * Evento reproduce o pausa audio
      *
-     * @param {event}
      */
-    function eventoReproducir(event) {
+    function eventPlayPause() {
         setState('playing', !getState('playing'));
         // Reproduce
         playPause();
@@ -112,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     function changeSpeed(newSpeed) {
         setState('ppm', newSpeed);
-        playPayse();
+        playPause();
         render();
     }
 
