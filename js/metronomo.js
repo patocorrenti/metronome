@@ -4,7 +4,7 @@
 //===
 
 document.addEventListener('DOMContentLoaded', function () {
-
+;
     // Initial state
     const state = {
         playing: false,
@@ -15,15 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Selectors
     const $PpmInput = document.querySelector('#ppm');
     const $playBtn = document.querySelector('#play-btn');
-    const $audioSrc = document.querySelector('#audio-metronomo');
+    const $audioSrc = document.querySelector('#audio-source');
 
     // Events
     $playBtn.addEventListener('click', eventPlayPause);
     $PpmInput.addEventListener('keyup', function() { changeSpeed(this.value) });
 
-    // Inicio
-    render();
-
+    // Init
+    render()
 
     function setState(key, value) {
         // Validate
@@ -43,9 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
     /**
      * Render
      *
-     * @param {number} ppm Pulsaciones por Minuto
-     * @param {boolean} isPlay ¿Esta reproduciendose?
-     * @return {boolean} Se ha renderizado
      */
     function render() {
         // PPM
@@ -59,46 +55,41 @@ document.addEventListener('DOMContentLoaded', function () {
     /**
      * PlayPause
      *
-     * @param {number} ppm Pulsaciones por Minuto
-     * @param {HTMLAudioElement} audio
-     * @param {boolean} isPlay ¿Esta reproduciendose?
-     * @return {intervalID} Intervalo nuevo
      */
     function playPause() {
         const audio = $audioSrc;
         let interval = {};
         
-        // Para intervalo
+        // Stop the interval
         clearInterval( getState('interval') );
 
-        // Empieza intervalo nuevo
+        // Starts a new interval
         if (getState('playing')) {
             interval = setInterval(function() {
-                // Reproduce audio
+                // Reproduces the audio
                 audio.play();
-            }, PPMToMiliseconds( getState('ppm') ));
+            }, PPM2Milisec( getState('ppm') ));
         }
 
         setState('interval', interval);
     }
 
     /**
-     * Transforma los PPM a milesimas
+     * Transforms PPMs to miliseconds
      *
      * @param {number} ppm
      * @return {number} Milesimas
      */
-    function PPMToMiliseconds(ppm) {
+    function PPM2Milisec(ppm) {
         return (60 / ppm) * 1000;
     }
 
     /**
-     * Evento reproduce o pausa audio
+     * Event - Toggles play pause
      *
      */
     function eventPlayPause() {
         setState('playing', !getState('playing'));
-        // Reproduce
         playPause();
         render();
     }
