@@ -1,14 +1,18 @@
-class Scheduler {
+class Scheduler extends Component {
 
     constructor( elementId ) {
 
-        this.state = {
-            tens: 0,
-            seconds: 0,
-            mins: 0,
-            hrs: 0,
-        }
+        super(
+            elementId,
+            {
+                tens: 0,
+                seconds: 0,
+                mins: 0,
+                hrs: 0,
+            }
+        );
 
+        // Elements
         this.$el = {
             tens: document.querySelector(`#${elementId} #tens`),
             seconds: document.querySelector(`#${elementId} #seconds`),
@@ -18,32 +22,42 @@ class Scheduler {
             buttonStop: document.querySelector(`#${elementId} #button-stop`),
             buttonReset: document.querySelector(`#${elementId} #button-reset`),
         }
-        this.Interval;
-      
-        this.bindEvents();
-    }
 
-    bindEvents() {
+        // Events
+        this.events = {
+            timerStart: new Event('timer-start'),
+            timerStop: new Event('timer-stop'),
+        }
+
+        this.Interval;
+
+        this.bindEventListeners();
+    }
+    
+    bindEventListeners() {
         this.$el.buttonStart.addEventListener('click', () => {
             clearInterval(this.Interval);
             this.Interval = setInterval( () => { this.count() }, 10 );
+            super.emitEvent(this.events.timerStart)
         })
         
         this.$el.buttonStop.addEventListener('click', () => {
-              clearInterval(this.Interval);
+            clearInterval(this.Interval);
+            super.emitEvent(this.events.timerStop)
         })
         
         this.$el.buttonReset.addEventListener('click', () => {
             clearInterval(this.Interval);
             this.resetTimer();
+            super.emitEvent(this.events.timerStop)
         })
     }
 
     render() {
-        this.$el.tens.innerHTML = this.zeroPad(this.state.tens);
-        this.$el.seconds.innerHTML = this.zeroPad(this.state.seconds);
-        this.$el.mins.innerHTML = this.zeroPad(this.state.mins);
-        this.$el.hrs.innerHTML = this.zeroPad(this.state.hrs);
+        this.$el.tens.innerHTML = this.zeroPad(super.getState('tens'));
+        this.$el.seconds.innerHTML = this.zeroPad(super.getState('seconds'));
+        this.$el.mins.innerHTML = this.zeroPad(super.getState('mins'));
+        this.$el.hrs.innerHTML = this.zeroPad(super.getState('hrs'));
     }
 
     zeroPad(num) {
@@ -52,29 +66,29 @@ class Scheduler {
     }
 
     resetTimer() {
-        this.state.seconds = 0; 
-        this.state.tens = 0;
-        this.state.mins = 0;
-        this.state.hrs = 0;
+        super.setState('seconds', 0);
+        super.setState('tens', 0);
+        super.setState('mins', 0);
+        super.setState('hrs', 0);
         this.render();
     }
 
     count () {
-        this.state.tens++; 
+        super.increaseState('tens', 1);
     
-        if (this.state.tens > 99) {
-            this.state.seconds++;
-            this.state.tens = 0;
+        if (super.getState('tens') > 99) {
+            super.increaseState('seconds', 1);
+            super.setState('tens', 0);
         }
 
-        if (this.state.seconds > 59) {
-            this.state.mins++;
-            this.state.seconds = 0;
+        if (super.getState('seconds') > 59) {
+            super.increaseState('mins', 1);
+            super.setState('seconds', 0);
         }
 
-        if (this.state.mins > 59) {
-            this.state.hrs++;
-            this.state.mins = 0;
+        if (super.getState('mins') > 59) {
+            super.increaseState('hrs', 1);
+            super.setState('mins', 0);
         }
     
         this.render();

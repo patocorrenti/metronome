@@ -1,14 +1,16 @@
-class Metronome extends State {
+class Metronome extends Component {
 
     constructor( elementId ) {
-
-        // Initial state
-        super({
-            playing: false,
-            ppm: 120,
-            interval: {}
-        })
-
+        
+        super(
+            elementId,
+            {
+                playing: false,
+                ppm: 120,
+                interval: {}
+            }
+        );
+        
         // Container element
         this.element = document.getElementById(elementId);
 
@@ -25,7 +27,7 @@ class Metronome extends State {
         }
 
         this.render();
-        this.bindEvents();
+        this.bindEventListeners();
     }
 
     render() {
@@ -34,12 +36,13 @@ class Metronome extends State {
         return true;
     }
 
-    bindEvents() {
+    bindEventListeners() {
         this.$el.playBtn.addEventListener('click', () => { this.eventPlayPause() });
         this.$el.PpmInput.addEventListener('keyup', (event) => { this.changeSpeed(event.target.value) });
     }
 
     playPause() {
+
         let interval = {};
         
         // Stop the interval
@@ -58,7 +61,7 @@ class Metronome extends State {
 
         super.setState('interval', interval);
     }
-
+        
     PPM2Milisec(ppm) {
         return (60 / ppm) * 1000;
     }
