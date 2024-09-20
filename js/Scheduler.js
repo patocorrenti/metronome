@@ -1,6 +1,6 @@
 class Scheduler {
 
-    constructor() {
+    constructor( elementId ) {
 
         this.state = {
             tens: 0,
@@ -10,13 +10,13 @@ class Scheduler {
         }
 
         this.$el = {
-            tens: document.getElementById('tens'),
-            seconds: document.getElementById('seconds'),
-            mins: document.getElementById('mins'),
-            hrs: document.getElementById('hrs'),
-            buttonStart: document.getElementById('button-start'),
-            buttonStop: document.getElementById('button-stop'),
-            buttonReset: document.getElementById('button-reset'),
+            tens: document.querySelector(`#${elementId} #tens`),
+            seconds: document.querySelector(`#${elementId} #seconds`),
+            mins: document.querySelector(`#${elementId} #mins`),
+            hrs: document.querySelector(`#${elementId} #hrs`),
+            buttonStart: document.querySelector(`#${elementId} #button-start`),
+            buttonStop: document.querySelector(`#${elementId} #button-stop`),
+            buttonReset: document.querySelector(`#${elementId} #button-reset`),
         }
         this.Interval;
       
