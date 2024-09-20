@@ -1,0 +1,9 @@
+.metronome .play-btn .pause {
+    display: none;
+}
+.metronome .play-btn.playing .pause {
+    display: inline-block;
+}
+.metronome .play-btn.playing .play {
+    display: none;
+}
