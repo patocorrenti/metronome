@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
     $PpmInput.addEventListener('keyup', function() { changeSpeed(this.value) });
 
     // Inicio
-    render(state.ppm, state.playing);
+    render();
 
 
-    function setState(field, value) {
+    function setState(key, value) {
         // Validate
         // TODO
 
@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return state;
     }
 
-    function getState() {
-        return state;
+    function getState(key) {
+        return state['key'];
     }
 
 
@@ -47,11 +47,11 @@ document.addEventListener('DOMContentLoaded', function () {
      * @param {boolean} isPlay ¿Esta reproduciendose?
      * @return {boolean} Se ha renderizado
      */
-    function render(ppm, isPlay) {
+    function render() {
         // PPM
-        $PpmInput.value = ppm;
+        $PpmInput.value = getState('ppm');
         // Text
-        $playBtn.classList.toggle('playing', isPlay);
+        $playBtn.classList.toggle('playing', getState('playing'));
         
         return true;
     }
@@ -62,21 +62,24 @@ document.addEventListener('DOMContentLoaded', function () {
      * @param {number} ppm Pulsaciones por Minuto
      * @param {HTMLAudioElement} audio
      * @param {boolean} isPlay ¿Esta reproduciendose?
-     * @param {intervalID} intervaloActual Intervalo
      * @return {intervalID} Intervalo nuevo
      */
-    function playPause(ppm, audio, isPlay, intervaloActual) {
-        let miIntervalo;
+    function playPause() {
+        const audio = $audioSrc;
+        let inverval;
+        
         // Para intervalo
-        clearInterval(intervaloActual);
+        clearInterval( getState('interval') );
+
         // Empieza intervalo nuevo
-        if (isPlay) {
-            miIntervalo = setInterval(function() {
+        if (getState('playing')) {
+            inverval = setInterval(function() {
                 // Reproduce audio
                 audio.play();
-            }, PPMToMiliseconds(ppm));
+            }, PPMToMiliseconds( getState('ppm') ));
         }
-        return miIntervalo;
+
+        setState('interval', interval);
     }
 
     /**
@@ -95,11 +98,10 @@ document.addEventListener('DOMContentLoaded', function () {
      * @param {event}
      */
     function eventoReproducir(event) {
-        // Inicia o pausa
-        state.playing = !state.playing;
+        setState('playing', !getState('playing'));
         // Reproduce
-        state.intervalo = playPause(state.ppm, $audioSrc, state.playing, state.intervalo);
-        render(state.ppm, state.playing);
+        playPause();
+        render();
     }
 
 
@@ -109,8 +111,9 @@ document.addEventListener('DOMContentLoaded', function () {
      * @param {newSpeed}
      */
     function changeSpeed(newSpeed) {
-        state.intervalo = playPause(newSpeed, $audioSrc, state.playing, state.intervalo);
-        render(newSpeed, state.playing);
+        setState('ppm', newSpeed);
+        playPayse();
+        render();
     }
 
 
