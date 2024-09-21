@@ -24,7 +24,7 @@
         <div>
             <p>
                 <!-- Boton para iniciar o pausar -->
-                <button id="play-btn">
+                <button id="play-btn" class="play-btn">
                     <span class="play">Play</span>
                     <span class="pause">Pause</span>
                 </button>
@@ -51,34 +51,23 @@
     <hr>
     <section id="scheduler">
         <h3>Scheduler</h3>
-        <div data-step="0">
-            0
-            <input type="text" name="time" placeholder="00:00:00" value="00:00:00" readonly/>
-            <input type="number" name="ppm" placeholder="PPM" value="100">
-        </div>
-        <div data-step="1">
-            1
-            <input type="text" name="time" placeholder="00:00:00" value="00:00:02"/>
-            <input type="number" name="ppm" placeholder="PPM" value="200">
-        </div>
-        <div data-step="2">
-            2
-            <input type="text" name="time" placeholder="00:00:00" value="00:00:04"/>
-            <input type="number" name="ppm" placeholder="PPM" value="100">
-        </div>
-        <div data-step="3">
-            3
-            <input type="text" name="time" placeholder="00:00:00" value="00:00:06"/>
-            <input type="number" name="ppm" placeholder="PPM" value="50">
-        </div>
-        <div data-step="4">
-            4
-            <input type="text" name="time" placeholder="00:00:00" value="00:00:08"/>
-            <input type="number" name="ppm" placeholder="PPM" value="300">
-        </div>
-        <div data-step="5">
-            5
-            <input type="text" name="time" placeholder="00:00:00" value="00:00:10"/>
+        <div data-step-container>
+            <div data-step>
+                <input type="text" name="time" placeholder="00:00:00" value="00:00:00" readonly/>
+                <input type="number" name="ppm" placeholder="PPM" value="100">
+            </div>
+            <div data-step="model">
+                <input type="text" name="time" placeholder="00:00:00" value="00:00:02"/>
+                <input type="number" name="ppm" placeholder="PPM" value="100">
+                <button>Remove</button>
+            </div>
+            <button type="button" data-step-add>
+                ADD
+            </button>
+            <div data-step>
+                <input type="text" name="time" placeholder="00:00:00" value="00:00:04"/>
+                END
+            </div>
         </div>
     </section>
 </body>

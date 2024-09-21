@@ -12,7 +12,10 @@ class Scheduler extends Component {
 
         // Elements
         this.$el = {
+            stepsContainer: document.querySelector(`#${elementId} [data-step-container]`),
             steps: document.querySelectorAll(`#${elementId} [data-step]`),
+            model: document.querySelector(`#${elementId} [data-step="model"]`),
+            addBtn: document.querySelector(`#${elementId} [data-step-add]`),
         }
 
         // Events
@@ -22,11 +25,16 @@ class Scheduler extends Component {
         }
 
         this.render();
+        this.bindEventListeners();
     }
 
     render() {
         this.$el.steps.forEach($e => $e.classList.remove('current'));
         this.$el.steps[ super.getState('currentStep') - 1 ]?.classList.add('current');
+    }
+
+    bindEventListeners() {
+        this.$el.addBtn.addEventListener('click', () => { this.addNewStep() })
     }
 
     updateCurrentTime(time) {
@@ -68,6 +76,29 @@ class Scheduler extends Component {
     reset() {
         super.resetState();
         this.render();
+    }
+
+    addNewStep() {
+        const $newStep = this.$el.model.cloneNode(true);
+        const $lastStep = this.getLastStep();
+        
+        // Initial setup
+        $newStep.dataset.step = '';
+        $newStep.querySelector('[name="time"]').value = $lastStep.querySelector('[name="time"]').value;
+        $newStep.querySelector('[name="ppm"]').value = $lastStep.querySelector('[name="ppm"]').value;
+
+        // Insert
+        this.$el.stepsContainer.insertBefore($newStep, this.$el.addBtn);
+
+        this.refreshSteps()
+    }
+
+    getLastStep() {
+        return this.$el.steps[this.$el.steps.length - 2];
+    }
+
+    refreshSteps() {
+        return this.$el.steps = super.wrapper().querySelectorAll(`[data-step]`);
     }
 
 }

@@ -6,6 +6,11 @@ class Component {
         this.state = initialState;
     }
 
+
+    wrapper() {
+        return this.$wrapper;
+    }
+
     emmiter() {
         return this.$wrapper;
     }
