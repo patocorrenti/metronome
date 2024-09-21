@@ -94,5 +94,12 @@ class Metronome extends Component {
         this.updateMetro();
     }
 
+    disableControls() {
+        this.$el.playBtn.disabled = true;
+    }
+
+    enableControls() {
+        this.$el.playBtn.disabled = false;
+    }
 
 }

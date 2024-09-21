@@ -11,13 +11,16 @@ class App {
     bindEventListeners() {
         this.Timer.emmiter().addEventListener('timer-start', () => {
             this.Metronome.eventPlay();
+            this.Metronome.disableControls();
             this.updateScheduler();
         });
         this.Timer.emmiter().addEventListener('timer-stop', () => {
             this.Metronome.eventStop();
+            this.Metronome.enableControls();
         });
         this.Timer.emmiter().addEventListener('timer-reset', () => {
             this.stopAndReset()
+            this.Metronome.enableControls();
         });
         this.Timer.emmiter().addEventListener('timer-second', () => {
             this.updateScheduler();
