@@ -1,4 +1,4 @@
-class Scheduler extends Component {
+class Timer extends Component {
 
     constructor( elementId ) {
 
