@@ -79,6 +79,9 @@ class Timer extends Component {
         if (super.getState('tens') > 99) {
             super.increaseState('seconds', 1);
             super.setState('tens', 0);
+            super.emitEvent(
+                new CustomEvent('timer-second', { detail: this.getCurrentTime() })
+            );
         }
 
         if (super.getState('seconds') > 59) {
@@ -92,6 +95,14 @@ class Timer extends Component {
         }
     
         this.render();
+    }
+
+    getCurrentTime() {
+        const hrs = this.zeroPad(super.getState('hrs'));
+        const mins = this.zeroPad(super.getState('mins'));
+        const sec = this.zeroPad(super.getState('seconds'));
+
+        return `${hrs}:${mins}:${sec}`;
     }
 
 }
