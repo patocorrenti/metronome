@@ -1,6 +1,7 @@
 class Scheduler extends Component {
  
     constructor(elementId) {
+
         super(
             elementId,
             {
@@ -12,10 +13,10 @@ class Scheduler extends Component {
 
         // Elements
         this.$el = {
-            stepsContainer: document.querySelector(`#${elementId} [data-step-container]`),
-            steps: document.querySelectorAll(`#${elementId} [data-step]`),
-            model: document.querySelector(`#${elementId} [data-step="model"]`),
-            addBtn: document.querySelector(`#${elementId} [data-step-add]`),
+            stepsContainer: super.wrapper().querySelector('[data-step-container]'),
+            steps: super.wrapper().querySelectorAll('[data-step]'),
+            model: super.wrapper().querySelector('[data-step="model"]'),
+            addBtn: super.wrapper().querySelector('[data-step-add]'),
         }
 
         // Events

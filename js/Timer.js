@@ -14,13 +14,13 @@ class Timer extends Component {
 
         // Elements
         this.$el = {
-            tens: document.querySelector(`#${elementId} #tens`),
-            seconds: document.querySelector(`#${elementId} #seconds`),
-            mins: document.querySelector(`#${elementId} #mins`),
-            hrs: document.querySelector(`#${elementId} #hrs`),
-            buttonStart: document.querySelector(`#${elementId} #button-start`),
-            buttonStop: document.querySelector(`#${elementId} #button-stop`),
-            buttonReset: document.querySelector(`#${elementId} #button-reset`),
+            tens: super.wrapper().querySelector('#tens'),
+            seconds: super.wrapper().querySelector('#seconds'),
+            mins: super.wrapper().querySelector('#mins'),
+            hrs: super.wrapper().querySelector('#hrs'),
+            buttonStart: super.wrapper().querySelector('#button-start'),
+            buttonStop: super.wrapper().querySelector('#button-stop'),
+            buttonReset: super.wrapper().querySelector('#button-reset'),
         }
 
         // Events

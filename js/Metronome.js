@@ -12,20 +12,12 @@ class Metronome extends Component {
                 }
             }
         );
-        
-        // Container element
-        this.element = document.getElementById(elementId);
-
-        if( !this.element ) {
-            alert('Failed!');
-            return;
-        }
 
         // Elements
         this.$el = {
-            PpmInput: document.querySelector(`#${elementId} #ppm`),
-            playBtn: document.querySelector(`#${elementId} #play-btn`),
-            audioSrc: document.querySelector(`#${elementId} #audio-source`),
+            PpmInput: super.wrapper().querySelector('#ppm'),
+            playBtn: super.wrapper().querySelector('#play-btn'),
+            audioSrc: super.wrapper().querySelector('#audio-source'),
         }
 
         this.render();
