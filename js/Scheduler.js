@@ -17,6 +17,7 @@ class Scheduler extends Component {
             steps: super.wrapper().querySelectorAll('[data-step]'),
             model: super.wrapper().querySelector('[data-step="model"]'),
             addBtn: super.wrapper().querySelector('[data-step-add]'),
+            removeBtns: super.wrapper().querySelectorAll('[data-step-remove]'),
         }
 
         // Events
@@ -25,6 +26,8 @@ class Scheduler extends Component {
             scheduleEnd: new Event('schedule-end'),
         }
 
+        this.$el.model.remove();
+        this.refreshSteps();
         this.render();
         this.bindEventListeners();
     }
@@ -36,6 +39,9 @@ class Scheduler extends Component {
 
     bindEventListeners() {
         this.$el.addBtn.addEventListener('click', () => { this.addNewStep() })
+        this.$el.removeBtns.forEach(
+            $b => $b.addEventListener('click', (event) => { this.removeStep(event) })
+        );
     }
 
     updateCurrentTime(time) {
@@ -81,10 +87,13 @@ class Scheduler extends Component {
 
     addNewStep() {
         const $newStep = this.$el.model.cloneNode(true);
+        const $btnRemove = $newStep.querySelector('[data-step-remove]');
         const $lastStep = this.getLastStep();
         
         // Initial setup
         $newStep.dataset.step = '';
+        $btnRemove.disabled = false;
+        $btnRemove.addEventListener('click', (event) => this.removeStep(event));
         $newStep.querySelector('[name="time"]').value = $lastStep.querySelector('[name="time"]').value;
         $newStep.querySelector('[name="ppm"]').value = $lastStep.querySelector('[name="ppm"]').value;
 
@@ -92,6 +101,7 @@ class Scheduler extends Component {
         this.$el.stepsContainer.insertBefore($newStep, this.$el.addBtn);
 
         this.refreshSteps()
+        return true;
     }
 
     getLastStep() {
@@ -99,7 +109,15 @@ class Scheduler extends Component {
     }
 
     refreshSteps() {
-        return this.$el.steps = super.wrapper().querySelectorAll(`[data-step]`);
+        this.$el.removeBtns = super.wrapper().querySelectorAll('[data-step-remove]');
+        this.$el.steps = super.wrapper().querySelectorAll(`[data-step]`);
+        return true;
+    }
+
+    removeStep(event) {
+        event.target.closest('[data-step]').remove();
+        this.refreshSteps();
+        return true;
     }
 
 }
