@@ -1,11 +1,23 @@
 .scheduler {
     
-    [data-step] {
-        padding: 5px;
+    padding: 20px;
+
+    header {
+        h3 {
+            margin-bottom: 20px;
+        }
+    }
+
+    .step {
         margin-bottom: 5px;
+        padding: 5px;
 
         &.current {
             background-color: lightblue;
+        }
+
+        input {
+            padding: 5px;
         }
     }
     

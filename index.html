@@ -15,63 +15,75 @@
     <script src="js/index.js"></script>
 </head>
 <body>
-    <header>
-        <h3>Metronome</h3>
-    </header>
-    <section id="metronome" class="metronome">
-        <input type="number" id="ppm">
-        <span>PPM</span>
-        <div>
-            <p>
-                <!-- Boton para iniciar o pausar -->
-                <button id="play-btn" class="play-btn">
-                    <span class="play">Play</span>
-                    <span class="pause">Pause</span>
-                </button>
-            </p>
-        </div>
-        <audio id="audio-source">
-            <!-- Para conseguir la mayor compatibilidad, se usa tanto OGG como MP3 -->
-            <source src="assets/audio/tick.ogg" type="audio/ogg">
-            <source src="assets/audio/tick.mp3" type="audio/mpeg">
-        </audio>
-    </section>
-    <hr>
-    <section id="timer">
-        <h3>Timer</h3>
-        <div>
-            <p>
-                <span id="hrs">00</span>:<span id="mins">00</span>:<span id="seconds">00</span>:<span id="tens">00</span>
-            </p>
-            <button id="button-start">Start</button>
-            <button id="button-stop">Stop</button>
-            <button id="button-reset">Reset</button>
-        </div>
-    </section>
-    <hr>
-    <section id="scheduler" class="scheduler">
-        <h3>Scheduler</h3>
-        <div data-step-container>
-            <div data-step>
-                <input type="text" name="time" placeholder="00:00:00" value="00:00:00" readonly/>
-                <input type="number" name="ppm" placeholder="PPM" value="100">
-            </div>
-            <div data-step="model">
-                <input type="text" name="time" placeholder="00:00:00" value="00:00:02"/>
-                <input type="number" name="ppm" placeholder="PPM" value="200">
-                <button type="button" data-step-remove>
-                    Remove
-                </button>
-            </div>
-            <button type="button" data-step-add>
-                ADD
-            </button>
-            <div data-step>
-                <input type="text" name="time" placeholder="00:00:00" value="00:00:10"/>
-                END
-            </div>
-        </div>
-    </section>
+    <div class="app">
+        <header class="main-header">
+            <h1>BeatPlanner</h1>
+        </header>
+        <main class="main-section">
+            <section id="timer" class="timer">
+                <header>
+                    <h3>Timer</h3>
+                </header>
+                <div>
+                    <div class="time">
+                        <span id="hrs">00</span>:<span id="mins">00</span>:<span id="seconds">00</span>:<span id="tens">00</span>
+                    </div>
+                    <div class="actions">
+                        <button id="button-start">Start</button>
+                        <button id="button-stop">Stop</button>
+                        <button id="button-reset">Reset</button>
+                    </div>
+                </div>
+            </section>
+            <section id="scheduler" class="scheduler">
+                <header>
+                    <h3>Scheduler</h3>
+                </header>
+                <div data-step-container>
+                    <div data-step class="step">
+                        <input type="text" name="time" placeholder="00:00:00" value="00:00:00" readonly disabled/>
+                        <input type="number" name="ppm" placeholder="PPM" value="100">
+                    </div>
+                    <div data-step="model" class="step">
+                        <input type="text" name="time" placeholder="00:00:00" value="00:00:02"/>
+                        <input type="number" name="ppm" placeholder="PPM" value="200">
+                        <button type="button" data-step-remove>
+                            Remove
+                        </button>
+                    </div>
+                    <button type="button" data-step-add>
+                        ADD
+                    </button>
+                    <div data-step class="step">
+                        <input type="text" name="time" placeholder="00:00:00" value="00:00:10"/>
+                        END
+                    </div>
+                </div>
+            </section>
+            <section id="metronome" class="metronome">
+                <header>
+                    <h3>Metronome</h3>
+                </header>
+                <input type="number" id="ppm">
+                <span>PPM</span>
+                <div>
+                    <p>
+                        <button id="play-btn" class="play-btn">
+                            <span class="play">Play</span>
+                            <span class="pause">Pause</span>
+                        </button>
+                    </p>
+                </div>
+                <audio id="audio-source">
+                    <source src="assets/audio/tick.ogg" type="audio/ogg">
+                    <source src="assets/audio/tick.mp3" type="audio/mpeg">
+                </audio>
+            </section>
+    </main>
+    <footer class="main-footer">
+        BeatPlanner v0.1 Beta
+    </footer>
+    </div>
 </body>
 </html>
 

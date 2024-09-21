@@ -1,0 +1,19 @@
+.timer {
+    background-color: var(--app_color_light-grey);
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+
+    header {
+        display: none;
+    }
+    .time {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .actions {
+        padding: 10px;
+    }
+}
+

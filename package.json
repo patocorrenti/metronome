@@ -1,10 +1,12 @@
 {
     "scripts": {
         "css": "node-sass --include-path scss styles/app.scss css/app.css",
-        "watch": "nodemon -e scss -x 'npm run css'"
+        "uglify-css": "uglifycss css/app.css > css/app.min.css",
+        "watch": "nodemon -e scss -x 'npm run css && npm run uglify-css'"
     },
     "devDependencies": {
         "node-sass": "^9.0.0",
-        "nodemon": "^3.1.7"
+        "nodemon": "^3.1.7",
+        "uglifycss": "^0.0.29"
     }
 }

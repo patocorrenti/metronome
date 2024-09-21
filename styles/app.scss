@@ -1,2 +1,8 @@
-@import 'metronome';
-@import 'scheduler';
+@import 'reset.scss';
+
+@import 'variables.scss';
+
+@import 'layout.scss';
+@import 'timer.scss';
+@import 'metronome.scss';
+@import 'scheduler.scss';

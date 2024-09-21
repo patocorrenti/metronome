@@ -1,5 +1,9 @@
 
 .metronome {
+    background-color: var(--app_color_light-grey);
+    box-sizing: border-box;
+    padding: 20px;
+    width: 100%;
 
     .play-btn {
         .pause {

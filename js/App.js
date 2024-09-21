@@ -40,6 +40,7 @@ class App {
     }
 
     stopAndReset() {
+        this.Metronome.enableControls();
         this.Metronome.eventStop();
         this.Scheduler.reset();
         this.Timer.resetTimer();
