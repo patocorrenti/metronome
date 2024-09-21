@@ -16,7 +16,9 @@ class App {
             this.Metronome.eventStop();
         });
         this.Timer.emmiter().addEventListener('timer-second', (event) => {
-            console.log( event.detail );
+            this.Scheduler.updateCurrentTime(
+                this.Timer.getCurrentTime()
+            );
         });
     }
 

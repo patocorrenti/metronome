@@ -27,6 +27,7 @@ class Timer extends Component {
         this.events = {
             timerStart: new Event('timer-start'),
             timerStop: new Event('timer-stop'),
+            timerSecond: new CustomEvent('timer-second'),
         }
 
         this.Interval;
@@ -79,9 +80,7 @@ class Timer extends Component {
         if (super.getState('tens') > 99) {
             super.increaseState('seconds', 1);
             super.setState('tens', 0);
-            super.emitEvent(
-                new CustomEvent('timer-second', { detail: this.getCurrentTime() })
-            );
+            super.emitEvent(this.events.timerSecond);
         }
 
         if (super.getState('seconds') > 59) {

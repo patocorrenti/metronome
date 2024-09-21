@@ -4,4 +4,8 @@ class Scheduler extends Component {
         super(elementId);
     }
 
+    updateCurrentTime(time) {
+        console.log('current Time is', time);
+    }
+
 }
