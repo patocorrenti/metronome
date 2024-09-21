@@ -2,6 +2,7 @@ class Component {
 
     constructor(elementId, initialState={}) {
         this.$wrapper = document.getElementById(elementId);
+        this.initialState = JSON.parse(JSON.stringify(initialState));
         this.state = initialState;
     }
 
@@ -27,6 +28,10 @@ class Component {
 
     toggleState(key) {
         return this.state[key] = !this.state[key];
+    }
+
+    resetState() {
+        this.state = JSON.parse(JSON.stringify(this.initialState));
     }
 
 }

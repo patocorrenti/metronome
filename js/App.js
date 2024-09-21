@@ -16,18 +16,30 @@ class App {
         this.Timer.emmiter().addEventListener('timer-stop', () => {
             this.Metronome.eventStop();
         });
+        this.Timer.emmiter().addEventListener('timer-reset', () => {
+            this.stopAndReset()
+        });
         this.Timer.emmiter().addEventListener('timer-second', () => {
             this.updateScheduler();
         });
         this.Scheduler.emmiter().addEventListener('schedule-change', () => {
             this.Metronome.changeConfig( this.Scheduler.getState('metronomeConfig') );
         })
+        this.Scheduler.emmiter().addEventListener('schedule-end', () => {
+            this.stopAndReset()
+        });
     }
 
     updateScheduler() {
         this.Scheduler.updateCurrentTime(
             this.Timer.getCurrentTime()
         );
+    }
+
+    stopAndReset() {
+        this.Metronome.eventStop();
+        this.Scheduler.reset();
+        this.Timer.resetTimer();
     }
 
 }

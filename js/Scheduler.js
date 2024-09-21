@@ -18,6 +18,7 @@ class Scheduler extends Component {
         // Events
         this.events = {
             scheduleChange: new Event('schedule-change'),
+            scheduleEnd: new Event('schedule-end'),
         }
 
         this.render();
@@ -39,7 +40,12 @@ class Scheduler extends Component {
         const time2Compare = this.getStepValue(currentStep, 'time');
 
         if( currentTime === time2Compare ) {
-            super.increaseState('currentStep', 1);
+            
+            if( !this.nextStep() ) {
+                super.emitEvent(this.events.scheduleEnd);
+                return false;
+            }
+
             super.setState('metronomeConfig', {
                 ppm: this.getStepValue(currentStep, 'ppm'),
             })
@@ -50,6 +56,18 @@ class Scheduler extends Component {
 
     getStepValue(step, key) {
         return this.$el.steps[step].querySelector(`[name="${key}"]`).value;
+    }
+
+    nextStep() {
+        const nextStep = super.getState('currentStep') + 1;
+        return !!this.$el.steps[nextStep]
+            ? super.setState('currentStep', nextStep)
+            : false;
+    }
+
+    reset() {
+        super.resetState();
+        this.render();
     }
 
 }

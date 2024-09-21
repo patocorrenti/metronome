@@ -27,6 +27,7 @@ class Timer extends Component {
         this.events = {
             timerStart: new Event('timer-start'),
             timerStop: new Event('timer-stop'),
+            timerReset: new Event('timer-reset'),
             timerSecond: new CustomEvent('timer-second'),
         }
 
@@ -39,18 +40,17 @@ class Timer extends Component {
         this.$el.buttonStart.addEventListener('click', () => {
             clearInterval(this.Interval);
             this.Interval = setInterval( () => { this.count() }, 10 );
-            super.emitEvent(this.events.timerStart)
+            super.emitEvent(this.events.timerStart);
         })
         
         this.$el.buttonStop.addEventListener('click', () => {
             clearInterval(this.Interval);
-            super.emitEvent(this.events.timerStop)
+            super.emitEvent(this.events.timerStop);
         })
         
         this.$el.buttonReset.addEventListener('click', () => {
-            clearInterval(this.Interval);
             this.resetTimer();
-            super.emitEvent(this.events.timerStop)
+            super.emitEvent(this.events.timerReset);
         })
     }
 
@@ -67,6 +67,7 @@ class Timer extends Component {
     }
 
     resetTimer() {
+        clearInterval(this.Interval);
         super.setState('seconds', 0);
         super.setState('tens', 0);
         super.setState('mins', 0);
