@@ -7,3 +7,12 @@
 .metronome .play-btn.playing .play {
     display: none;
 }
+
+
+[data-step] {
+    padding: 5px;
+    margin-bottom: 5px;
+}
+[data-step].current {
+    background-color: lightblue;
+}

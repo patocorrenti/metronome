@@ -6,8 +6,10 @@ class Metronome extends Component {
             elementId,
             {
                 playing: false,
-                ppm: 120,
-                interval: {}
+                interval: {},
+                config: {
+                    ppm: 120,
+                }
             }
         );
         
@@ -31,7 +33,7 @@ class Metronome extends Component {
     }
 
     render() {
-        this.$el.PpmInput.value = super.getState('ppm');
+        this.$el.PpmInput.value = super.getState('config').ppm;
         this.$el.playBtn.classList.toggle('playing', super.getState('playing'));
         return true;
     }
@@ -55,7 +57,7 @@ class Metronome extends Component {
                     // Reproduces the audio
                     this.$el.audioSrc.play();
                 },
-                this.PPM2Milisec( super.getState('ppm') )
+                this.PPM2Milisec( super.getState('config').ppm )
             );
         }
 
@@ -83,7 +85,12 @@ class Metronome extends Component {
     }
 
     changeSpeed(newSpeed) {
-        super.setState('ppm', newSpeed);
+        super.setState('config', {ppm: newSpeed});
+        this.updateMetro();
+    }
+
+    changeConfig(newConfig) {
+        super.setState('config', newConfig)
         this.updateMetro();
     }
 
