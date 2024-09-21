@@ -41,7 +41,7 @@ class Metronome extends Component {
         this.$el.PpmInput.addEventListener('keyup', (event) => { this.changeSpeed(event.target.value) });
     }
 
-    playPause() {
+    updateMetro() {
 
         let interval = {};
         
@@ -60,6 +60,7 @@ class Metronome extends Component {
         }
 
         super.setState('interval', interval);
+        this.render();
     }
         
     PPM2Milisec(ppm) {
@@ -67,15 +68,23 @@ class Metronome extends Component {
     }
 
     eventPlayPause() {
-        super.setState('playing', !super.getState('playing'));
-        this.playPause();
-        this.render();
+        super.toggleState('playing')
+        this.updateMetro();
+    }
+
+    eventPlay() {
+        super.setState('playing', true);
+        this.updateMetro();
+    }
+
+    eventStop() {
+        super.setState('playing', false);
+        this.updateMetro();
     }
 
     changeSpeed(newSpeed) {
         super.setState('ppm', newSpeed);
-        this.playPause();
-        this.render();
+        this.updateMetro();
     }
 
 

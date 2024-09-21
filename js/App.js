@@ -9,10 +9,10 @@ class App {
 
     bindEventListeners() {
         this.Scheduler.emmiter().addEventListener('timer-start', () => {
-            this.Metronome.eventPlayPause()
+            this.Metronome.eventPlay()
         })
         this.Scheduler.emmiter().addEventListener('timer-stop', () => {
-            this.Metronome.eventPlayPause()
+            this.Metronome.eventStop()
         })
     }
 

@@ -25,4 +25,8 @@ class Component {
         return this.state[key] += value;
     }
 
+    toggleState(key) {
+        return this.state[key] = !this.state[key];
+    }
+
 }
