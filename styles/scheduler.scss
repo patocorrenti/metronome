@@ -1,0 +1,12 @@
+.scheduler {
+    
+    [data-step] {
+        padding: 5px;
+        margin-bottom: 5px;
+
+        &.current {
+            background-color: lightblue;
+        }
+    }
+    
+}
