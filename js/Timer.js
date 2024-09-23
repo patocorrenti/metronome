@@ -19,14 +19,14 @@ class Timer extends Component {
             mins: super.wrapper().querySelector('#mins'),
             hrs: super.wrapper().querySelector('#hrs'),
             buttonStart: super.wrapper().querySelector('#button-start'),
-            buttonStop: super.wrapper().querySelector('#button-stop'),
+            buttonPause: super.wrapper().querySelector('#button-pause'),
             buttonReset: super.wrapper().querySelector('#button-reset'),
         }
 
         // Events
         this.events = {
             timerStart: new Event('timer-start'),
-            timerStop: new Event('timer-stop'),
+            timerPause: new Event('timer-pause'),
             timerReset: new Event('timer-reset'),
             timerSecond: new CustomEvent('timer-second'),
         }
@@ -43,9 +43,9 @@ class Timer extends Component {
             super.emitEvent(this.events.timerStart);
         })
         
-        this.$el.buttonStop.addEventListener('click', () => {
+        this.$el.buttonPause.addEventListener('click', () => {
             clearInterval(this.Interval);
-            super.emitEvent(this.events.timerStop);
+            super.emitEvent(this.events.timerPause);
         })
         
         this.$el.buttonReset.addEventListener('click', () => {

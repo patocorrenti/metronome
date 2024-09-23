@@ -14,7 +14,7 @@ class App {
             this.Metronome.disableControls();
             this.updateScheduler();
         });
-        this.Timer.emmiter().addEventListener('timer-stop', () => {
+        this.Timer.emmiter().addEventListener('timer-pause', () => {
             this.Metronome.eventStop();
             this.Metronome.enableControls();
         });
