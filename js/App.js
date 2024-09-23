@@ -9,7 +9,7 @@ class App {
     }
 
     bindEventListeners() {
-        this.Timer.emmiter().addEventListener('timer-start', () => {
+        this.Timer.emmiter().addEventListener('timer-play', () => {
             this.Metronome.eventPlay();
             this.Metronome.disableControls();
             this.updateScheduler();
