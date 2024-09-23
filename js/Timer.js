@@ -9,6 +9,7 @@ class Timer extends Component {
                 seconds: 0,
                 mins: 0,
                 hrs: 0,
+                playing: false,
             }
         );
 
@@ -32,7 +33,7 @@ class Timer extends Component {
         }
 
         this.Interval;
-
+        this.render();
         this.bindEventListeners();
     }
     
@@ -40,25 +41,42 @@ class Timer extends Component {
         this.$el.buttonPlay.addEventListener('click', () => {
             clearInterval(this.Interval);
             this.Interval = setInterval( () => { this.count() }, 10 );
+            super.setState('playing', true);
+            this.render();
             super.emitEvent(this.events.timerPlay);
         })
         
         this.$el.buttonPause.addEventListener('click', () => {
             clearInterval(this.Interval);
+            super.setState('playing', false);
+            this.render();
             super.emitEvent(this.events.timerPause);
         })
         
         this.$el.buttonStop.addEventListener('click', () => {
             this.resetTimer();
+            super.setState('playing', false);
+            this.render();
             super.emitEvent(this.events.timerStop);
         })
     }
 
     render() {
+        (super.getState('playing')) ? this.showPause() : this.showPlay();
         this.$el.tens.innerHTML = this.zeroPad(super.getState('tens'));
         this.$el.seconds.innerHTML = this.zeroPad(super.getState('seconds'));
         this.$el.mins.innerHTML = this.zeroPad(super.getState('mins'));
         this.$el.hrs.innerHTML = this.zeroPad(super.getState('hrs'));
+    }
+
+    showPlay() {
+        this.$el.buttonPlay.style.display = "inline-block";
+        this.$el.buttonPause.style.display = "none";
+    }
+
+    showPause() {
+        this.$el.buttonPause.style.display = "inline-block";
+        this.$el.buttonPlay.style.display = "none";
     }
 
     zeroPad(num) {
