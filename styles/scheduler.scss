@@ -40,7 +40,7 @@
             flex-grow: 1;
         }
         .ppm {
-            width: 4ch;
+            width: 5ch;
         }
         .remove {
             align-items: center;
@@ -78,5 +78,20 @@
         }
     }
     
+    &.play-mode {
+        .step {
+            &.current, &.played {
+                display: none;
+            }
+        }
+        .add {
+            display: none;
+        }
+        .step {
+            .remove {
+                display: none;
+            }
+        }
+    }
     
 }

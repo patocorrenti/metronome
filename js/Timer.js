@@ -86,10 +86,7 @@ class Timer extends Component {
 
     resetTimer() {
         clearInterval(this.Interval);
-        super.setState('seconds', 0);
-        super.setState('tens', 0);
-        super.setState('mins', 0);
-        super.setState('hrs', 0);
+        super.resetState();
         this.render();
     }
 

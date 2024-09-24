@@ -33,8 +33,12 @@ class Scheduler extends Component {
     }
 
     render() {
-        this.$el.steps.forEach($e => $e.classList.remove('current'));
-        this.$el.steps[ super.getState('currentStep') - 1 ]?.classList.add('current');
+        const currentStep = super.getState('currentStep');
+        this.$el.steps.forEach($e => $e.classList.remove('current', 'played'));
+        this.$el.steps[ currentStep - 1 ]?.classList.add('current');
+        for(let i=0; i<currentStep-1; i++) {
+            this.$el.steps[i]?.classList.add('played');
+        }
     }
 
     bindEventListeners() {

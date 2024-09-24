@@ -12,11 +12,13 @@ class App {
         this.Timer.emmiter().addEventListener('timer-play', () => {
             this.Metronome.eventPlay();
             this.Metronome.disableControls();
+            this.Scheduler.wrapper().classList.add('play-mode')
             this.updateScheduler();
         });
         this.Timer.emmiter().addEventListener('timer-pause', () => {
-            this.Metronome.eventStop();
             this.Metronome.enableControls();
+            this.Metronome.eventStop();
+            this.Scheduler.wrapper().classList.remove('play-mode');
         });
         this.Timer.emmiter().addEventListener('timer-stop', () => {
             this.stopAndReset()
@@ -27,7 +29,7 @@ class App {
         });
         this.Scheduler.emmiter().addEventListener('schedule-change', () => {
             this.Metronome.changeConfig( this.Scheduler.getState('metronomeConfig') );
-        })
+        }) 
         this.Scheduler.emmiter().addEventListener('schedule-end', () => {
             this.stopAndReset()
         });
@@ -44,6 +46,7 @@ class App {
         this.Metronome.eventStop();
         this.Scheduler.reset();
         this.Timer.resetTimer();
+        this.Scheduler.wrapper().classList.remove('play-mode');
     }
 
 }
