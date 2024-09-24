@@ -83,20 +83,24 @@
                 </header>
                 <div data-step-container>
                     <div data-step class="step">
-                        <input type="text" name="time" placeholder="00:00:00" value="00:00:00" readonly disabled/>
-                        <input type="number" name="ppm" placeholder="PPM" value="100">
-                    </div>
-                    <div data-step="model" class="step">
-                        <input type="text" name="time" placeholder="00:00:00" value="00:00:02"/>
-                        <input type="number" name="ppm" placeholder="PPM" value="200">
-                        <button type="button" data-step-remove>
+                        <input class="time" type="text" name="time" placeholder="00:00:00" value="00:00:00" readonly disabled/>
+                        <input class="ppm" type="number" name="ppm" placeholder="PPM" value="100">
+                        <button class="remove" type="button" data-step-remove style="visibility: hidden;">
                             <img class="icon" src="assets/icons/minus.svg" alt="Remove">
-                            Remove
+                            <span class="label">Remove</span>
                         </button>
                     </div>
-                    <button type="button" data-step-add>
+                    <div data-step="model" class="step">
+                        <input class="time" type="text" name="time" placeholder="00:00:00" value="00:00:02"/>
+                        <input class="ppm" type="number" name="ppm" placeholder="PPM" value="200">
+                        <button class="remove" type="button" data-step-remove>
+                            <img class="icon" src="assets/icons/minus.svg" alt="Remove">
+                            <span class="label">Remove</span>
+                        </button>
+                    </div>
+                    <button class="add" type="button" data-step-add>
                         <img class="icon" src="assets/icons/plus.svg" alt="Add">
-                        ADD
+                        <span class="label">ADD</span>
                     </button>
                     <div data-step class="step">
                         <input type="text" name="time" placeholder="00:00:00" value="00:00:10"/>
