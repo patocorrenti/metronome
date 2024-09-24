@@ -1,20 +1,47 @@
 
 .metronome {
-    background-color: var(--app_color_light-grey);
+    background-color: var(--app_color_black);
     box-sizing: border-box;
-    padding: 20px;
+    padding: 0 20px 20px;
     width: 100%;
 
-    .play-btn {
-        .pause {
-            display: none;
+    header {
+        display: none;
+    }
+    .speed {
+        align-items: flex-start;
+        display: flex;
+        justify-content: center;
+
+        .value {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 2.1875rem;
+            width: 4ch;
         }
-        &.playing {
+        .unit {
+            color: #fff;
+            font-size: 0.9375rem;
+            padding-top: 0.625rem;
+        }
+    }
+    .actions {
+        text-align: center;
+
+        .play-btn {
+            display: none;
+
             .pause {
-                display: inline-block;
-            }
-            .play {
                 display: none;
+            }
+            &.playing {
+                .pause {
+                    display: inline-block;
+                }
+                .play {
+                    display: none;
+                }
             }
         }
     }

@@ -1,10 +1,29 @@
 body {
-  font-family: var(--app_font_main);
+  font-family: var(--app_font_mono);
 }
 
 button {
   cursor: pointer;
+  font-family: var(--app_font_mono);
   padding: 5px;
+}
+input {
+  font-family: var(--app_font_mono);
+}
+
+.btn-primary {
+  background-color: #333333;
+  border-radius: 3px;
+  border: none;
+  color: #CECECE;
+  min-width: 100px;
+  outline: none;
+  padding: 10px 20px;
+
+  .icon {
+    color: #fff;
+    max-height: 40px;
+  }
 }
 
 .app {
@@ -15,7 +34,7 @@ button {
 }
 
 .main-header {
-  background-color: var(--app_color_black);
+  background-color: var(--app_color_green);
   box-sizing: border-box;
   padding: 10px;
   text-align: center;
