@@ -7,7 +7,8 @@ class Scheduler extends Component {
             {
                 currentStep: 0,
                 currentTime: '00:00:00',
-                metronomeConfig: {}, 
+                metronomeConfig: {},
+                playing: false,
             }
         );
 
@@ -36,6 +37,8 @@ class Scheduler extends Component {
         const currentStep = super.getState('currentStep');
         this.$el.steps.forEach($e => $e.classList.remove('current', 'played'));
         this.$el.steps[ currentStep - 1 ]?.classList.add('current');
+        super.wrapper().classList.toggle('play-mode', super.getState('playing'));
+
         for(let i=0; i<currentStep-1; i++) {
             this.$el.steps[i]?.classList.add('played');
         }
@@ -46,6 +49,11 @@ class Scheduler extends Component {
         this.$el.removeBtns.forEach(
             $b => $b.addEventListener('click', (event) => { this.removeStep(event) })
         );
+    }
+
+    playMode(play=true) {
+        super.setState('playing', play);
+        this.render();
     }
 
     updateCurrentTime(time) {
